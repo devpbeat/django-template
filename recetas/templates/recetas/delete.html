@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+{% block title %}
+Eliminar Receta
+{% endblock %}
+
+{% block content %}
+<div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{ object.image.url }}" class="img-fluid rounded-start" alt="{{ object.title }}">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h2>{{ object.title }}</h2>
+          <h4 class="text-danger-50 text-danger">Are you sure to Delete?</h4>
+          
+          <form action="{% url 'receta_borrar' object.id %}" method="POST">
+              {% csrf_token %}
+          <button href="{% url 'receta_borrar' object.id %}" class="btn btn-danger btn-lg rounded-1">
+              Si, eliminar
+            </button>
+            <a href="{% url 'receta_lista' %}" class="btn btn-light rounded-1">
+              Cancelar
+            </a>
+          </form>
+          <p class="mt-2">{{ object.description }}</p>
+          <p class="card-text">
+            <small class="text-muted">{{ object.created_at }}</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    {{ form }}
+    <input type="submit" value="Confirm">
+</form>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Actualizar Receta
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center">
+    <form action="{% url 'receta_actualizar' object.id %}"  method="POST"  class="w-75 border border-1 py-2 px-3" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-primary rounded-1"> Actualizar</button>
+        <a href="{% url 'receta_lista' %}" class="btn btn-light btn-sm rounded-1"> Cancelar</a>
+    </form>
+</div>
+{% endblock %}
